@@ -5,31 +5,30 @@
 /* GLOBAL STYLES */
 
 :root {
-  --font-primary: "Poppins", sans-serif;
-  --font-secondary: "Arvo", serif;
-  --font-code: "Roboto", monospace;
-  --bg-color: #00163f;
-  --bg-color-transparent: #00163f80;
-  --font-color: #ffffff;
-  --btn-bg-color: #ffffff;
-  --accent-color: #be7efe;
-  --header-shadow: var(--accent-color) 0px 0px 5px;
-  --card-shadow: var(--accent-color) 0px 0px 20px;
+  --font: "Poppins", sans-serif;
+  --primary: #F25252;
+  --bg: #15171a;
+  --text1: #f0f0f0;
+  --text2: #dbdbdb;
+  --body-width: 800px;
+  --heading-size: 36px;
+  --text-size: 17px;
+  --bg-opacity: .05;
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: var(--font) !important;
 }
 
 body {
-  background-color: var(--bg-color);
+  background-color: var(--bg);
   display: flex;
   flex-flow: column;
   height: 100vh;
-  color: var(--font-color);
-  font-family: var(--font-primary);
+  color: var(--text2);
 }
 
 .container {
@@ -42,17 +41,21 @@ body {
   overflow: hidden;
 }
 
+.container h1{
+  color: var(--text1);
+}
+
 /* HEADER */
 
 header {
-  background-color: var(--bg-color);
-  box-shadow: var(--header-shadow);
+  background-color: var(--bg);
 }
 
 header .container {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin: 0 auto;
 }
 
 .menu {
@@ -66,7 +69,7 @@ header .container {
   align-items: center;
   height: 100%;
   text-align: center;
-  margin: 0 auto 0 35vw;
+  margin: 0 auto;
   opacity: 0;
   transform: translateY(10vh);
   transition: all 0.5s ease-in-out;
@@ -78,21 +81,24 @@ header .container {
 }
 
 .not-connected h1 {
-  text-shadow: 2px 2px 0 var(--accent-color);
-  font-style: italic;
-  margin: 2rem 0;
-  font-size: 3.5rem;
+  font-size: var(--heading-size);
+  color: var(--text1);
+  margin: 10px 0;
+}
+
+.not-connected h2{
+  font-size: var(--text-size);
+  color: var(--primary);
 }
 
 .not-connected p {
-  font-size: 1.1rem;
-  font-family: var(--font-secondary);
-  line-height: 1.8;
+  font-size: var(--text-size);
+  color: var(--text2);
 }
 
 .not-connected a {
   text-decoration: none;
-  color: var(--accent-color);
+  color: var(--primary);
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -100,26 +106,22 @@ header .container {
 /* BUTTONS */
 
 .btn {
-  display: inline-block;
-  padding: 1rem 2rem;
-  background: var(--btn-bg-color);
-  color: var(--accent-color);
-  font-family: var(--font-secondary);
-  font-style: italic;
-  font-weight: bold;
-  font-size: 1rem;
-  text-align: center;
-  text-transform: capitalize;
-  transition: all 0.3s ease;
-  box-shadow: var(--header-shadow);
-  cursor: pointer;
-  position: relative;
-  text-decoration: none;
-  outline: none;
+  padding: 10px 25px !important;
+  font-size: var(--text-size) !important;
+  font-weight: bold !important;
+  background-color: var(--primary) !important;
+  text-decoration: none !important;
+  color: var(--bg) !important;
+  border: 2px transparent solid !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  transition: .2s ease-in !important;
 }
-.btn:hover {
-  box-shadow: none;
+
+.btn:hover{
+  filter: brightness(1.2);
 }
+
 .btn:disabled {
   cursor: default;
 }
@@ -140,12 +142,9 @@ header .container {
 
 .card {
   position: relative;
-  background-color: var(--bg-color);
+  background-color: rgba(255, 255, 255, 0.05);
   border-radius: 5px;
-  border: 3px solid var(--accent-color);
-  box-shadow: var(--card-shadow);
-  padding: 5rem;
-  margin-bottom: 2rem;
+  padding: 60px 80px;
   opacity: 0;
   transform: translateX(100vw);
   transition: all 0.5s ease-in-out;
@@ -184,11 +183,11 @@ section {
   height: auto;
 }
 .countdown .clock-item .count-number {
-  background: var(--accent-color);
-  color: var(--font-color);
+  background: var(--primary);
+  color: var(--font);
   font-size: 2rem;
   font-weight: 700;
-  font-family: var(--font-secondary);
+  font-family: var(--font);
   padding: 1rem;
   display: inline-block;
   width: 100%;
@@ -198,9 +197,9 @@ section {
 }
 .countdown .clock-item .count-text {
   background: var(--btn-bg-color);
-  font-family: var(--font-secondary);
+  font-family: var(--font);
   font-size: 1.1rem;
-  color: var(--bg-color);
+  color: var(--bg);
   padding: 0.5rem 0.7rem;
   display: inline-block;
   width: 100%;
@@ -210,8 +209,6 @@ section {
 }
 
 .countdown h1 {
-  text-shadow: 2px 2px 0 var(--accent-color);
-  font-style: italic;
   margin: 2rem 0;
   font-size: 3.5rem;
   text-align: center;
@@ -223,7 +220,7 @@ section {
 
 .countdown > p {
   font-size: 1.1rem;
-  font-family: var(--font-secondary);
+  font-family: var(--font);
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -246,11 +243,11 @@ section {
 }
 
 .mint-qty {
-  display: flex;
+  display: none;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: var(--accent-color);
+  background-color: var(--primary);
   border-radius: 5px;
 }
 
@@ -280,14 +277,14 @@ section {
 }
 
 .total-price-container {
-  display: flex;
+  display: none;
   justify-content: space-between;
   width: 100%;
   padding: 1rem 0 2rem;
 }
 
 .total-price-container p {
-  color: var(--accent-color);
+  color: var(--primary);
 }
 
 /* MINTED CONTAINER */
@@ -324,12 +321,21 @@ section {
 }
 
 .splide__slide {
-  border: var(--accent-color) solid;
+  border: var(--primary) solid;
   border-width: 5px 10px;
 }
 
 .splide__slide img {
   width: 100%;
+}
+
+img{
+  width: 64px;
+  transition: transform .2s ease-in-out;
+}
+
+img:hover{
+  transform: scale(1.1);
 }
 
 /* SPINNER */
@@ -352,7 +358,7 @@ section {
     max-width: 8rem;
   }
   .not-connected {
-    background-color: var(--bg-color-transparent);
+    background-color: var(--bg-transparent);
     border-radius: 5px;
     padding: 2rem;
     margin: 0 auto;

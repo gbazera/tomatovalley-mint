@@ -24,19 +24,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  const splide = new Splide(".splide", {
-    type: "loop",
-    arrows: false,
-    perMove: 3,
-    pagination: false,
-    autoplay: true,
-    direction: 'ttb',
-    height: "calc(100vh - 90px)",
-    width: '30vw',
-    autoHeight: true,
-  });
-  splide.mount();
-
   updateConnectStatus();
   if (MetaMaskOnboarding.isMetaMaskInstalled()) {
     window.ethereum.on("accountsChanged", (newAccounts) => {
@@ -52,7 +39,7 @@ const updateConnectStatus = async () => {
   const notConnected = document.querySelector('.not-connected');
   const spinner = document.getElementById("spinner");
   if (!MetaMaskOnboarding.isMetaMaskInstalled()) {
-    onboardButton.innerText = "Install MetaMask!";
+    onboardButton.innerText = "CONNECT";
     onboardButton.onclick = () => {
       onboardButton.innerText = "Connecting...";
       onboardButton.disabled = true;
@@ -74,7 +61,7 @@ const updateConnectStatus = async () => {
     window.contract = new web3.eth.Contract(abi, contractAddress);
     loadInfo();
   } else {
-    onboardButton.innerText = "Connect MetaMask!";
+    onboardButton.innerText = "CONNECT";
     // HIDE SPINNER
     spinner.classList.add('hidden');
     notConnected.classList.remove('hidden');
@@ -230,45 +217,12 @@ async function loadInfo() {
   const pricePerMint = document.getElementById("pricePerMint");
   const maxPerMint = document.getElementById("maxPerMint");
   const totalSupply = document.getElementById("totalSupply");
-  const mintInput = document.getElementById("mintInput");
   
   pricePerMint.innerText = `${price} ${priceType}`;
   maxPerMint.innerText = `${info.deploymentConfig.tokensPerMint}`;
   totalSupply.innerText = `${info.deploymentConfig.maxSupply}`;
-  mintInput.setAttribute("max", info.deploymentConfig.tokensPerMint);
 
   // MINT INPUT
-  const mintIncrement = document.getElementById("mintIncrement");
-  const mintDecrement = document.getElementById("mintDecrement");
-  const setQtyMax = document.getElementById("setQtyMax");
-  const min = mintInput.attributes.min.value || false;
-  const max = mintInput.attributes.max.value || false;
-  mintDecrement.onclick = () => {
-    let value = parseInt(mintInput.value) - 1 || 1;
-    if(!min || value >= min) {
-      mintInput.value = value;
-      setTotalPrice()
-    }
-  };
-  mintIncrement.onclick = () => {
-    let value = parseInt(mintInput.value) + 1 || 1;
-    if(!max || value <= max) {
-      mintInput.value = value;
-      setTotalPrice()
-    }
-  };
-  setQtyMax.onclick = () => {
-    mintInput.value = max;
-    setTotalPrice()
-  };
-  mintInput.onchange = () => {
-    setTotalPrice()
-  };
-  mintInput.onkeyup = async (e) => {
-    if (e.keyCode === 13) {
-      mint();
-    }
-  };
   mintButton.onclick = mint;
 }
 
