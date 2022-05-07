@@ -346,9 +346,19 @@ img:hover{
   transform: translate(-50%, -50%) scale(3);
 }
 
-/* MEDIA QUERIES */
+/* UTILITIES */
 
-@media screen and (max-width: 768px) {
+.hidden {
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  :root {
+      --body-width: 100%;
+      --heading-size: 30px;
+      --text-size: 15px;
+  }
+
   .menu {
     gap: 1rem;
   }
@@ -386,17 +396,8 @@ img:hover{
   .countdown p {
     font-size: 1rem;
   }
-  .card {
-    padding: 1rem;
-  }
   .mint-qty .btn {
     padding: 1rem;
     font-size: 13px;
   }
-}
-
-/* UTILITIES */
-
-.hidden {
-  display: none;
 }
