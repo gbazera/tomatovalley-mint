@@ -7,13 +7,13 @@
 :root {
   --font: "Poppins", sans-serif;
   --primary: #F25252;
-  --bg: #15171a;
-  --text1: #f0f0f0;
-  --text2: #dbdbdb;
+  --bg: #000;
+  --text1: #eee;
+  --text2: #ccc;
   --body-width: 800px;
   --heading-size: 36px;
   --text-size: 17px;
-  --bg-opacity: .05;
+  --bg-opacity: .02;
 }
 
 * {
@@ -46,10 +46,6 @@ body {
 }
 
 /* HEADER */
-
-header {
-  background-color: var(--bg);
-}
 
 header .container {
   flex-direction: row;
@@ -142,17 +138,10 @@ header .container {
 
 .card {
   position: relative;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
   border-radius: 5px;
   padding: 60px 80px;
-  opacity: 0;
-  transform: translateX(100vw);
-  transition: all 0.5s ease-in-out;
-}
-
-.show-card {
-  opacity: 1;
-  transform: translateX(0);
+  transition: .2s ease-in-out;
 }
 
 /* COUNTDOWN SECTION */
@@ -240,6 +229,14 @@ section {
   width: 100%;
   text-align: center;
   margin-bottom: 2rem;
+}
+
+.info-container h3{
+  color: var(--text1) !important;
+}
+
+.info-container p{
+  color: var(--text2) !important;
 }
 
 .mint-qty {
@@ -400,4 +397,8 @@ img:hover{
     padding: 1rem;
     font-size: 13px;
   }
+}
+
+.error{
+  color: var(--primary);
 }

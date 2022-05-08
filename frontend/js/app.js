@@ -39,7 +39,7 @@ const updateConnectStatus = async () => {
   const notConnected = document.querySelector('.not-connected');
   const spinner = document.getElementById("spinner");
   if (!MetaMaskOnboarding.isMetaMaskInstalled()) {
-    onboardButton.innerText = "CONNECT";
+    onboardButton.innerText = "INSTALL METAMASK";
     onboardButton.onclick = () => {
       onboardButton.innerText = "Connecting...";
       onboardButton.disabled = true;
@@ -141,6 +141,7 @@ async function checkChain() {
 
 async function loadInfo() {
   window.info = await window.contract.methods.getInfo().call();
+  const mintedQuantity = await contract.methods.totalSupply().call();
   const publicMintActive = await contract.methods.mintingActive().call();
   const presaleMintActive = await contract.methods.presaleActive().call();
   const mainHeading = document.getElementById("mainHeading");
@@ -182,7 +183,7 @@ async function loadInfo() {
       }
     } catch(e) {
       // console.log(e);
-      mainText.innerText = p_presale_mint_already_minted;
+      mainText.innerText = p_presale_mint_already_;
       actionButton.innerText = button_presale_already_minted;
     }
     setTotalPrice();
@@ -201,12 +202,6 @@ async function loadInfo() {
   // HIDE SPINNER
   spinner.classList.add('hidden');
 
-  // SHOW CARD
-  setTimeout(() => {
-    const countdownCard = document.querySelector('.countdown');
-    countdownCard.classList.add('show-card');
-  }, 1000);
-
   let priceType = '';
   if(chain === 'rinkeby') {
     priceType = 'ETH';
@@ -220,7 +215,8 @@ async function loadInfo() {
   
   pricePerMint.innerText = `${price} ${priceType}`;
   maxPerMint.innerText = `${info.deploymentConfig.tokensPerMint}`;
-  totalSupply.innerText = `${info.deploymentConfig.maxSupply}`;
+  if(mintedQuantity == info.deploymentConfig.maxSupply) totalSupply.innerText = "SOLD OUT";
+  else totalSupply.innerText = `${info.deploymentConfig.maxSupply - mintedQuantity} / 1000`;
 
   // MINT INPUT
   mintButton.onclick = mint;
@@ -282,6 +278,7 @@ async function mint() {
       } else {
         const mainText = document.getElementById("mainText");
         mainText.innerText = mint_failed;
+        mainText.classList.add("error");
         mintButton.innerText = button_public_mint;
         mintButton.disabled = false;
 
@@ -290,6 +287,7 @@ async function mint() {
     } catch(e) {
       const mainText = document.getElementById("mainText");
       mainText.innerText = mint_failed;
+      mainText.classList.add("error");
       mintButton.innerText = button_public_mint;
       mintButton.disabled = false;
 
@@ -319,6 +317,7 @@ async function mint() {
       } else {
         const mainText = document.getElementById("mainText");
         mainText.innerText = mint_failed;
+        mainText.classList.add("error");
         mintButton.innerText = button_presale_mint_whitelisted;
         mintButton.disabled = false;
 
@@ -327,6 +326,7 @@ async function mint() {
     } catch(e) {
       const mainText = document.getElementById("mainText");
       mainText.innerText = mint_failed;
+      mainText.classList.add("error");
       mintButton.innerText = button_presale_mint_whitelisted;
       mintButton.disabled = false;
 
